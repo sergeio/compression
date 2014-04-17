@@ -1,0 +1,19 @@
+#! /bin/bash
+
+run_tests() {
+    for input_num in {1,2,3,4}; do
+        for compression_type in {simple,huffman,not_huffman}; do
+            python compress.py "$compression_type" sample_text"$input_num".txt "$compression_type"_compression"$input_num".bin
+            echo $compression_type $input_num $(size_ratio $compression_type $input_num)
+        done
+        echo
+    done
+}
+
+size_ratio () {
+    echo "$(wc -c < $1_compression$2.bin) / $(wc -c < sample_text$2.txt)" |
+    bc -l |
+    sed -E 's/(\...).*/\1/' # Truncate output to 2 decimal places
+}
+
+run_tests
