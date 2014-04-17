@@ -53,6 +53,21 @@ $ python -c "print len(set((c for c in open('sample_text4.txt', 'r').read())))"
 `sample_text2.txt` requires 6 bits per letter for the simple algorithm.
 `sample_text3.txt` requires 5 bits per letter for the simple algorithm.
 
+## The Functions
+
+So far I've implemented 3 functions:
+
+ 1. The `simple` function figures out how many unique characters are in the
+    input file, and generates a mapping, using the minimum amount of bits per
+    character possible.  (Again, this depends on the total amount of unique
+    characters in the input)
+ 2. The `not_huffman` function is what I thought Huffman Codes were (but having
+    a sneaking suspicion I was wrong), having forgotten a lot since uni.  Look
+    at the compression function docstring in `compress_not_huffman.py` for a
+    bit more detail.
+ 3. The `huffman` function is an implementation of Huffman Codes, having read
+    [Wikipedia](https://en.wikipedia.org/wiki/Huffman_code).
+
 
 ## Results
 
@@ -74,7 +89,6 @@ not_huffman 3 .71
 simple 4 .39
 huffman 4 .29
 not_huffman 4 .19
-
 ```
 
 Again, the output you see is in the format:
@@ -96,7 +110,8 @@ combination of unique characters, filesize, and entropy.
 ## Where are the decompression functions?
 
 There really should be some, if only to verify that the compression is working
-the way I intend it to, and to get a truer measure of compression ratio (since
-decompression would require storing additional data, like the character
-mapping, in the compressed file.  But as this is meant only as me satisfying a
-curiosity, they don't yet exist.  If I don't lose interest, they will be added.
+the way I intend it to, and to get a truer measure of compression ratio.
+(Since decompression would require storing additional data, like the character
+mapping, in the compressed file)  But as this is meant only as me satisfying a
+curiosity, they don't yet exist.  If I don't lose interest, they will be
+added.
